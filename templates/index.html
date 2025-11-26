@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Breast Cancer Predictor</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="box">
+
+        <h2>Breast Cancer Prediction</h2>
+
+        <!-- Error Message -->
+        {% if error %}
+        <div class="result" style="background:#ff4d4d; color:white;">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <form method="POST">
+
+            <label>Mean Radius</label>
+            <input type="number" step="any" name="mean_radius" required
+                   autofocus
+                   placeholder="e.g., 14.5"
+                   value="{{ request.form.mean_radius if request.method=='POST' }}">
+
+            <label>Mean Texture</label>
+            <input type="number" step="any" name="mean_texture" required
+                   placeholder="e.g., 19.3"
+                   value="{{ request.form.mean_texture if request.method=='POST' }}">
+
+            <label>Mean Smoothness</label>
+            <input type="number" step="any" name="mean_smoothness" required
+                   placeholder="e.g., 0.10"
+                   value="{{ request.form.mean_smoothness if request.method=='POST' }}">
+
+            <label>Mean Compactness</label>
+            <input type="number" step="any" name="mean_compactness" required
+                   placeholder="e.g., 0.25"
+                   value="{{ request.form.mean_compactness if request.method=='POST' }}">
+
+            <label>Mean Concavity</label>
+            <input type="number" step="any" name="mean_concavity" required
+                   placeholder="e.g., 0.30"
+                   value="{{ request.form.mean_concavity if request.method=='POST' }}">
+
+            <button type="submit">Predict</button>
+
+        </form>
+
+        {% if prediction %}
+            <div class="result">{{ prediction }}</div>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
